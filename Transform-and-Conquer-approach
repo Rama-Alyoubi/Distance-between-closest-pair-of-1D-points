@@ -1,0 +1,21 @@
+#Manhattan Distance
+def TnC_closest_pair_1D(P):
+    P.sort() 
+    print("After sorting: ",P)
+    min_dist = float('inf')  
+    index_p1=0
+    index_p2=0   
+    n=len(P)
+    for i in range(n-1):
+        dist = abs(P[i+1] - P[i]) 
+        if dist < min_dist:
+            index_p1= i
+            index_p2= i+1 
+            
+        min_dist=min(min_dist,dist)
+            
+    return min_dist, index_p1, index_p2
+
+P = [0.828017, 0.560448, 0.575401, 0.472955, 0.769765, 0.802066, 0.510641, 0.410543, 0.312333, 0.102791, 0.022523, 0.141918, 0.0916411, 0.776046, 0.570279, 0.41265, 0.903828, 0.285627, 0.932184, 0.0937411]
+dist,index1,index2=TnC_closest_pair_1D(P)
+print("Minimum Distance:",dist,"\nindex 1:",index1,"\nindex 2:",index2)
