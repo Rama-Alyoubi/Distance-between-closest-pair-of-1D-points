@@ -1,0 +1,16 @@
+def  BruteForceClosestPair_1D(p):
+    d=float('inf')
+    n=len(p)
+
+    for i in range(n-1):
+        for j in range(i+1,n):
+            x=abs(p[j] - p[i])
+            if x<d:
+                index1=i
+                index2=j
+            d=min(d,x)
+            
+    return d,index1,index2
+p = [0.828017, 0.560448, 0.575401, 0.472955, 0.769765, 0.802066, 0.510641, 0.410543, 0.312333, 0.102791, 0.022523, 0.141918, 0.0916411, 0.776046, 0.570279, 0.41265, 0.903828, 0.285627, 0.932184, 0.0937411]
+d,index1,index2=BruteForceClosestPair_1D(p)
+print("Minimum Distance:",d,"\nindex 1:",index1,"\nindex 2:",index2)
