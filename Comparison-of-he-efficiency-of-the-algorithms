@@ -1,0 +1,63 @@
+import math
+import random
+import time
+import matplotlib.pyplot as plt
+
+def  BruteForceClosestPair_1D(p):
+    d=float('inf')
+    n=len(p)
+
+    for i in range(n-1):
+        for j in range(i+1,n):
+            x=abs(p[j] - p[i])
+            if x<d:
+                index1=i
+                index2=j
+            d=min(d,x)
+            
+    return d,index1,index2
+
+def TnC_closest_pair_1D(P):
+    P.sort()  
+    min_dist = float('inf')  
+    index_p1=0
+    index_p2=0   
+    n=len(P)
+    for i in range(n-1):
+        dist = abs(P[i+1] - P[i])
+        if dist < min_dist:
+            index_p1= i
+            index_p2= i+1 
+            
+        min_dist=min(min_dist,dist)
+        
+    return min_dist, index_p1, index_p2
+
+
+def generate_random_input(n):
+    return [random.uniform(0, 50) for _ in range(n)]
+
+
+input_sizes = [10, 20, 100, 1000, 5000]
+BF_times = []
+TnC_times = []
+
+for n in input_sizes:
+    P = generate_random_input(n)
+
+    start_time = time.time()
+    BruteForceClosestPair_1D(P)
+    end_time = time.time()
+    BF_times.append(end_time - start_time)
+
+    start_time = time.time()
+    TnC_closest_pair_1D(P)
+    end_time = time.time()
+    TnC_times.append(end_time - start_time)
+
+plt.plot(input_sizes, BF_times, label='Brute force')
+plt.plot(input_sizes, TnC_times, label='Transform and Conquer')
+plt.xlabel('Input size')
+plt.ylabel('Execution time')
+plt.legend(loc="upper left",frameon=True)
+plt.show()
